@@ -59,7 +59,9 @@ struct ContentView: View {
             return
         }
         guard givenInterager > 0, givenInterager < 101 else {
-            feedback = "please provide an interger between 1 and 100."}
+            feedback = "please provide an interger between 1 and 100."
+            return
+        }
         // is the guess correct
     }
 }
