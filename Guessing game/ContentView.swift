@@ -14,6 +14,9 @@ struct ContentView: View {
     
     var body: some View {
         
+        NavigationView {
+            
+        
         VStack {
             Text("Guessing Game")
             
@@ -22,16 +25,25 @@ struct ContentView: View {
             TextField("ENter your guess here",
                       text: $theUserGuess)
             Button("Submit Guess") {
-        //cheack the users guess
+                //cheack the users guess
             }
             
             Text("You guessed \(theUserGuess).")
+        }
+        .navigationTitle("Guessing Game")
+        
+        }
+        
+        struct ContentView_Previews: PreviewProvider {
+            static var previews: some View {
+                ContentView()
+            }
         }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
     }
 }
