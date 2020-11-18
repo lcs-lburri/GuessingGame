@@ -18,10 +18,11 @@ struct ContentView: View {
     //feedback to the user
     @State private var feedback = ""
     
+    //keep track of whether the game  is over
     @State private var gameOver = false
     
     
-    //keep track of whether the game is over
+
     var body: some View {
         
         NavigationView {
@@ -32,14 +33,19 @@ struct ContentView: View {
                 
                 Text("I'm thinking of a number between 1 and 100. Guess what it is!")
                     .font(.title)
+                    .multilineTextAlignment(.center)
                     .padding(.horizontal, 20.0)
                 
                 TextField("Enter your guess here",
                           text: $theUserGuess)
+                    .multilineTextAlignment(.center)
+                    
+                    
                 
                 Button("Submit Guess") {
                     //cheack the users guess
                     checkGuess()
+                
                 }
                 
                 Text("You guessed \(theUserGuess).")
@@ -58,6 +64,7 @@ struct ContentView: View {
                 .navigationTitle("Guessing Game")
                 
             }
+    
         }
     }
     
@@ -89,7 +96,7 @@ struct ContentView: View {
     
     //reset the game
     func resetGame() {
-        
+        if gameOver = true 
         //Pick a new random number
         
         target = Int.random(in: 1...100)
