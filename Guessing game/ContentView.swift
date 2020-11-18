@@ -10,14 +10,18 @@ import SwiftUI
 struct ContentView: View {
     
     // the guess made by the user
-    @State private var theUserGuess = "50"
+    @State private var theUserGuess = ""
     
     //the number that the user should guess
-    let taget = Int.random(in: 1...100)
+    @State private var target = Int.random(in: 1...100)
     
     //feedback to the user
     @State private var feedback = ""
     
+    @State private var gameOver = false
+    
+    
+    //keep track of whether the game is over
     var body: some View {
         
         NavigationView {
@@ -30,10 +34,12 @@ struct ContentView: View {
                     .font(.title)
                     .padding(.horizontal, 20.0)
                 
-                TextField("ENter your guess here",
+                TextField("Enter your guess here",
                           text: $theUserGuess)
+                
                 Button("Submit Guess") {
                     //cheack the users guess
+                    checkGuess()
                 }
                 
                 Text("You guessed \(theUserGuess).")
@@ -45,11 +51,16 @@ struct ContentView: View {
                 
                 Spacer()
             }
-            .navigationTitle("Guessing Game")
-            
-            
+            if gameOver == true {
+                Button("reset game") {resetGame()
+                    
+                }
+                .navigationTitle("Guessing Game")
+                
+            }
         }
     }
+    
     
     func checkGuess() {
         
@@ -63,8 +74,36 @@ struct ContentView: View {
             return
         }
         // is the guess correct
+        if givenInterager == target{
+            feedback =  "you guessed it correct!"
+            gameOver = true
+        }
+        else if givenInterager > target{
+            feedback = "Guess lower"
+        }
+        else if givenInterager < target{
+            feedback = "Guess higher"
+        }
+        
     }
+    
+    //reset the game
+    func resetGame() {
+        
+        //Pick a new random number
+        
+        target = Int.random(in: 1...100)
+        
+        //clear out the old feedback from the prior round
+        
+        theUserGuess = ""
+        feedback = ""
+    }
+    
 }
+
+
+
 
 
 struct ContentView_Previews: PreviewProvider {
@@ -74,3 +113,4 @@ struct ContentView_Previews: PreviewProvider {
     }
     
 }
+
